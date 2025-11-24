@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Categorías</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+</head>
+<body>
+     <header>
+            <nav class="navbar">
+
+                <ul class="nav-links">
+                    <li><a href="categorias.html" style = "text-decoration: underline;">Cargar Categorias</a></li>
+                    <li><a href="productos.html" >Cargar Productos</a></li>
+                     <li><a href="lista_categorias.html">Lista Categorias</a></li>
+                      <li><a href="lista_productos.html">Lista productos</a></li>
+                
+                </ul>
+            </nav>
+        </header>
+    
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Listado de Categorías</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="table-dark">
+                    <th>#ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="categorias-lista">
+              
+                <tr></tr>
+
+            </tbody>
+        </table>
+
+        <div class="text-center mt-3">
+            <a href="categorias.html" class="btn btn-primary">Agregar Categoría</a>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        
+        $.ajax({
+            url: '../../class/autoload.php',
+            method: 'POST',
+            data: { action: 'listarCategorias' },
+            success: function(response) {
+                $('#categorias-lista').html(response);
+            }
+        });
+        
+    });
+</script>
+</body>
+</html>

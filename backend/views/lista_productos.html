@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Productos</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+     <header>
+            <nav class="navbar">
+
+                <ul class="nav-links">
+                    <li><a href="categorias.html" style = "text-decoration: underline;">Cargar Categorias</a></li>
+                    <li><a href="productos.html" >Cargar Productos</a></li>
+                     <li><a href="lista_categorias.html">Lista Categorias</a></li>
+                      <li><a href="lista_productos.html">Lista productos</a></li>
+                
+                </ul>
+            </nav>
+        </header>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Productos</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+
+            <tbody id="productos-lista">
+                <!-- Aquí se cargan dinámicamente los productos -->
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="productos.html" class="btn btn-primary">Agregar Producto</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '../../class/autoload.php',
+                method: 'POST',
+                data: { action: 'listarProductos' },
+                success: function (response) {
+                    $('#productos-lista').html(response);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

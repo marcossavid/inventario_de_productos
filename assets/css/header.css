@@ -1,0 +1,33 @@
+header {
+    background: linear-gradient(135deg, #3a7bd5, #3a6073);
+    padding: 15px 0;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.navbar {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
