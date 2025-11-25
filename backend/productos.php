@@ -1,5 +1,5 @@
 <?php
-
+//archivo de backend->productos.php
 require_once '../class/productos.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -1,5 +1,6 @@
 <?php
 /*autor Marcos Savid*/
+/*archivo de class->productos.php*/
 require_once 'data_base.php';
 
 class Productos {
