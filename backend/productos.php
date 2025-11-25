@@ -2,14 +2,20 @@
 //archivo de backend->productos.php
 require_once '../class/productos.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre = $_POST['nombre'] ?? null;
-    $descripcion = $_POST['descripcion'] ?? null;
-    $categoria = $_POST['categoria'] ?? null;
-    $precio = $_POST['precio'] ?? null;
+      // *** VERIFICACIÓN CRÍTICA ***
+    if (empty($_POST) && !empty($_FILES)) {
+         die("ERROR: La petición es POST, pero \$POST está vacío. Revisa 'post_max_size' y 'upload_max_filesize' en php.ini.");
+    }
+    // ***************************
+    $nombre = $_POST['nombre'] ?? NULL;
+    $descripcion = $_POST['descripcion'] ?? NULL;
+    $categoria = $_POST['categoria'] ?? NULL;
+    $precio = $_POST['precio'] ?? NULL;
 
     // Procesar Imagen
-    $imagen = null;
+    $imagen = NULL;
 
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $nombreOriginal = $_FILES['imagen']['name'];
@@ -43,5 +49,7 @@ if ($producto->guardar()) {
 }
 
 } else {
+    // Si no es POST, incluye la vista del formulario
     include 'views/productos.html';
 }    
+?>

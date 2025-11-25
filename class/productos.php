@@ -40,3 +40,4 @@ class Productos {
         return $this->db->delete($sql, $params);
     }
 }
+?>

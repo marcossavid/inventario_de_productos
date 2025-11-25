@@ -48,7 +48,7 @@
         <button type="submit">Guardar</button>
         <h1 class="btn_antonio">El boton Antonio</h1>
     </form>-->
-   <form action="../productos.php" method="POST" enctype="multipart/form-data"></form>
+   <form id="form-productos" action="../productos.php" method="POST" enctype="multipart/form-data">
 
     <label>Nombre del Producto</label>
     <input type="text" name="nombre" required>
@@ -61,7 +61,7 @@
 
     <label>Categoría</label>
     <input type="number" name="categoria" required>
-
+    
     <label>Precio</label>
     <input type="number" name="precio" required>
 
@@ -70,5 +70,6 @@
 
      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src= "../../assets/js/validaciones.js" type = "text/javascript"> </script>
+      
 </body>
 </html>
