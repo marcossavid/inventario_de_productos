@@ -18,7 +18,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'listarHome') {
         echo '
         <div class="col-sm-12 col-md-6 col-lg-3">
             <div class="product-card">
-                <img src="./assets/img/' . $prod['imagen'] . '" class="product-image">
+                <img src="../assets/img/' . $prod['imagen'] . '" class="product-image">
                 <h5><strong>' . $prod['nombre'] . '</strong></h5>
                 <p class="text-muted">' . $prod['categoria'] . '</p>
                 <p>' . $prod['descripcion'] . '</p>

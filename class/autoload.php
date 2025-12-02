@@ -1,5 +1,5 @@
 <?php
-//archivo class->autoload
+//archivo class->autoload autor Marco Savid
 spl_autoload_register(function($clase) {
     $ruta = __DIR__ . '/' . $clase . '.php';
     if (file_exists($ruta)) {
@@ -33,7 +33,7 @@ if (isset($_POST['action'])) {
             foreach ($productos as $prod) {
 
                 // Ruta de imágenes
-                $rutaImagen = "../assets/img/" . $prod['imagen'];
+                $rutaImagen = "../../assets/img/" . $prod['imagen'];
 
                 echo "<tr>
                         <td>{$prod['id']}</td>
