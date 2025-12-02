@@ -43,10 +43,10 @@ class Productos {
     // api: join entre la tabla productos y categoria
 public function listarConCategorias() {
     $db = new Database();
-    $sql = "SELECT p.id, p.nombre, p.precio, p.descripcion, p.image, 
+    $sql = "SELECT p.id, p.nombre, p.precio, p.descripcion, p.imagen, 
             c.nombre AS categoria
             FROM productos p
-            INNER JOIN categoria c
+            INNER JOIN categorias c
             ON p.categoria_id = c.id";
             
     return $db->select($sql);

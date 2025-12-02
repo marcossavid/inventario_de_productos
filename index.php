@@ -1,7 +1,7 @@
 <?php
 // Redirigir al home / aautor marcos savid
-if (isset($_POST['action'])) {
-    header('Location: views/home.html');
+if (!isset($_POST['action'])) {
+    header("Location: views/home.html");
     exit();
 }
 
