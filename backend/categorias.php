@@ -2,7 +2,7 @@
 /*autor Marcos Savid*/
 require_once '../class/categorias.php';
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $nombre = $_POST['nombre'] ?? '';
 
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $categoria->guardar();
 
         echo "<script>alert('Categoría guardada correctamente'); 
-        window.location.href='../backend/views/lista_categorias.html';</script>";
+        window.location.href='../views/home.html';</script>";
 
     } else {
 

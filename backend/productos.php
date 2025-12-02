@@ -1,4 +1,5 @@
 <?php
+//autor marcos savid
 //archivo de backend->productos.php
 require_once '../class/productos.php';
 
@@ -43,7 +44,7 @@ $producto->setPrecio($precio);
 $producto->setImagen($imagen);
 
 if ($producto->guardar()) {
-    echo "<script>alert('Producto guardado correctamente'); window.location.href='views/lista_productos.html';</script>";
+    echo "<script>alert('Producto guardado correctamente'); window.location.href='../views/home.html';</script>";
 } else {
     echo "<script>alert('Error al guardar el producto'); window.history.back();</script>";
 }

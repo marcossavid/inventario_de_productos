@@ -39,5 +39,18 @@ class Productos {
         $params = [$id];
         return $this->db->delete($sql, $params);
     }
+
+    // api: join entre la tabla productos y categoria
+public function listarConCategorias() {
+    $db = new Database();
+    $sql = "SELECT p.id, p.nombre, p.precio, p.descripcion, p.image, 
+            c.nombre AS categoria
+            FROM productos p
+            INNER JOIN categoria c
+            ON p.categoria_id = c.id";
+            
+    return $db->select($sql);
+}
+
 }
 ?>
