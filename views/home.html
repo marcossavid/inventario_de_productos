@@ -59,16 +59,15 @@
 
                 <ul class="nav-links">
                        <li><a href=""style = "text-decoration: underline;">Home</a></li>
-                    <li><a href="../backend/views/categorias.html" >Cargar Categorias</a></li>
-                    <li><a href="../backend/views/productos.html" >Cargar Productos</a></li>
+
                      <li><a href="../backend/views/lista_categorias.html">Lista Categorias</a></li>
-                      <li><a href="../backend/views/lista_productos.html">Lista productos</a></li>
+                      
                 
                 </ul>
                   <img src="../assets/img/logo.png" class="logo" alt="Logo de la empresa">
             </nav>
         </header>
-
+    <!--LISTA DES PRODUCTOS-->
     <div class="container mt-4">
          <div class="admin-buttons">
             <button class="btn btn-primary mx-2">
@@ -78,10 +77,29 @@
                 <a href="../backend/views/productos.html">Agregar Producto</a>
             </button>
         </div>
-        <h2 class="text-center mb-4">My Store</h2>
-        <!--carga de productos-->
+
+        <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Productos</h1>
+
+        <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Acciones</th> </tr>
+    </thead>
+    <tbody id="productos-lista">
+        </tbody>
+</table>
+    </div>
+
+       <!-- <h2 class="text-center mb-4">My Store</h2>
         <div id="productos-container" class="row g-4">
-            </div>
+            </div> -->
 
        
     </div>
@@ -89,16 +107,87 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
+       // $(document).ready(function () {
+          //  $.ajax({
+            //    url: '../index.php',
+              //  type: "POST",
+                //data: { action: "listarHome" },
+                //success: function (response) {
+                  //  $("#productos-container").html(response);
+                //}
+            //});
+       // });
+  
         $(document).ready(function () {
-            $.ajax({
-                url: '../index.php',
-                type: "POST",
-                data: { action: "listarHome" },
-                success: function (response) {
-                    $("#productos-container").html(response);
+        // 1. CARGAR LOS PRODUCTOS AL INICIAR
+        // Apuntamos al controlador de productos que es el encargado de hablar con la clase
+        $.ajax({
+            url: '../backend/productos.php', 
+            method: 'GET', // Usamos GET para listar
+            data: { action: 'listarHome' }, 
+            success: function (response) {
+                // El backend nos va a devolver los productos en JSON y los dibujamos acá
+                let html = '';
+                if(response.length > 0) {
+                    response.forEach(prod => {
+                        html += `
+                            <tr id="fila-producto-${prod.id}">
+                                <td>${prod.id}</td>
+                                <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain;"></td>
+                                <td>${prod.nombre}</td>
+                                <td>${prod.descripcion}</td>
+                                <td>${prod.categoria}</td>
+                                <td>$${prod.precio}</td>
+                                text-align: center;
+                                <td>
+                                    <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    html = '<tr><td colspan="7" class="text-center">No hay productos registrados</td></tr>';
                 }
-            });
+                $('#productos-lista').html(html);
+            },
+            error: function() {
+                $('#productos-lista').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar productos</td></tr>');
+            }
         });
-    </script>
+
+        // 2. EVENTO PARA ELIMINAR EL PRODUCTO AL HACER CLIC
+        $(document).on('click', '.btn-eliminar', function () {
+            const idProducto = $(this).data('id');
+            
+            if (confirm('¿Estás seguro de que querés eliminar este producto?')) {
+                $.ajax({
+                    url: '../backend/productos.php',
+                    method: 'POST',
+                    data: { 
+                        action: 'eliminar', 
+                        id: idProducto 
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.success) {
+                            alert(res.message);
+                            // Borramos la fila de la tabla al toque con una animación sutil
+                            $(`#fila-producto-${idProducto}`).fadeOut(400, function() {
+                                $(this).remove();
+                            });
+                        } else {
+                            alert('Error: ' + res.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Error de conexión con el servidor al intentar eliminar.');
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

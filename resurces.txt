@@ -1,3 +1,6 @@
+https://inventario-de-productos.great-site.net/views/home.html
+
+BAS DE DATOS
 -- 1. Crear la tabla de Categorías primero (porque Productos depende de ella)
 CREATE TABLE IF NOT EXISTS `categorias` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
