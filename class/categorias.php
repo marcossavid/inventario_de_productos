@@ -33,5 +33,11 @@ class Categorias {
         $params = [$id];
         return $this->db->delete($sql, $params);
     }
+
+    // --- ¡ESTO ES LO QUE FALTA! Método para traer todas las categorías ---
+    public function listarTodas() {
+        $sql = "SELECT id, nombre FROM categorias ORDER BY nombre ASC";
+        return $this->db->select($sql); // Usamos tu método select de la base de datos
+    }
 }
 ?>

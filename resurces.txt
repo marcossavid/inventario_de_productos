@@ -1,0 +1,22 @@
+-- 1. Crear la tabla de Categorías primero (porque Productos depende de ella)
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nombre` VARCHAR(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 2. Crear la tabla de Productos con la relación a categorías
+CREATE TABLE IF NOT EXISTS `productos` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nombre` VARCHAR(150) NOT NULL,
+  `imagen` VARCHAR(255) DEFAULT NULL,
+  `descripcion` TEXT NOT NULL,
+  `categoria_id` INT NOT NULL,
+  `precio` DECIMAL(10, 2) NOT NULL,
+  
+  -- Creamos la relación para que guarde el ID numérico de la categoría
+  CONSTRAINT `fk_productos_categorias` 
+    FOREIGN KEY (`categoria_id`) 
+    REFERENCES `categorias` (`id`) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

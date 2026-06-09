@@ -60,8 +60,10 @@
     <label>Descripción</label>
     <textarea name="descripcion" required></textarea>
 
-    <label>Categoría</label>
-    <input type="number" name="categoria" required>
+    <label for="categoria">Categoría:</label>
+<select name="categoria" id="categoria" required>
+    <option value="">Cargando categorías...</option>
+</select>
     
     <label>Precio</label>
     <input type="number" name="precio" required>
@@ -71,6 +73,33 @@
   <div>Autor Marcos Savid</div>
      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src= "../../assets/js/validaciones.js" type = "text/javascript"> </script>
-      
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Le pedimos la lista de categorías al backend (está una carpeta arriba '../')
+    fetch('../productos.php')
+        .then(response => response.json())
+        .then(categorias => {
+            const select = document.getElementById('categoria');
+            select.innerHTML = '<option value="">Seleccione una categoría</option>';
+            
+            if (categorias.length > 0) {
+                // Recorremos las categorías que trajo la base de datos
+                categorias.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.id;          // Por detrás guarda el ID numérico (ej: 1)
+                    option.textContent = cat.nombre; // En pantalla muestra el texto (ej: "Plantas y Paisajes")
+                    select.appendChild(option);
+                });
+            } else {
+                select.innerHTML = '<option value="">No hay categorías creadas aún</option>';
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar categorías:', error);
+            document.getElementById('categoria').innerHTML = '<option value="">Error al cargar categorías</option>';
+        });
+});
+</script>
 </body>
+    
 </html>

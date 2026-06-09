@@ -13,7 +13,7 @@ class Productos {
     private $db;
 
     public function __construct() {
-        $this->db = new DataBase;
+        $this->db = new DataBase(); // Con los paréntesis para mantener buenas prácticas
     }
 
     // --- Setters ---
@@ -41,16 +41,15 @@ class Productos {
     }
 
     // api: join entre la tabla productos y categoria
-public function listarConCategorias() {
-    $db = new Database();
-    $sql = "SELECT p.id, p.nombre, p.precio, p.descripcion, p.imagen, 
-            c.nombre AS categoria
-            FROM productos p
-            INNER JOIN categorias c
-            ON p.categoria_id = c.id";
-            
-    return $db->select($sql);
-}
-
+    public function listarConCategorias() {
+        $sql = "SELECT p.id, p.nombre, p.precio, p.descripcion, p.imagen, 
+                c.nombre AS categoria
+                FROM productos p
+                INNER JOIN categorias c
+                ON p.categoria_id = c.id";
+                
+        // Usamos de manera directa el $this->db que se creó en el constructor
+        return $this->db->select($sql);
+    }
 }
 ?>
