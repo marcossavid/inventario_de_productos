@@ -118,7 +118,7 @@
                     <h5 class="modal-title" id="modalEditarLabel">Editar Producto</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form-editar-producto" enctype="multipart/form-data">
+                <form id="form-editar-producto" enctype="multipart/form-data" onsubmit="return false;">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit-id">
                         <input type="hidden" name="action" value="editar">
@@ -284,11 +284,14 @@
                 $('#modalEditarProducto').modal('show');
             });
 
-            // 6. SUBMIT DEL FORMULARIO DE EDICIÓN VIA AJAX
+           // 6. SUBMIT DEL FORMULARIO DE EDICIÓN VIA AJAX
             $('#form-editar-producto').on('submit', function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Evita que la página se recargue cambie la URL
                 
                 let formData = new FormData(this);
+                
+                // 🎯 LÍNEA CRÍTICA AGREGADA: Le avisa a productos.php que la acción es "editar"
+                formData.append('action', 'editar'); 
 
                 $.ajax({
                     url: '../backend/productos.php',
@@ -308,10 +311,10 @@
                     },
                     error: function() {
                         alert('Error de comunicación con el servidor al editar.');
-                    }
+             }
                 });
-            });
-        });
+            }); // 🎯 CORREGIDO: Se cerró correctamente el evento submit
+        }); //
     </script>
 </body>
 </html>
