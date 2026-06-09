@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--archivo lista_categorias.html-->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,14 +11,9 @@
 <body>
      <header>
             <nav class="navbar">
-
                 <ul class="nav-links">
-                       <li><a href="../../views/home.html">Home</a></li>
-                    
-                     <li><a href="lista_categorias.html"style = "text-decoration: underline;">Lista Categorias</a></li>
-                     
-
-                
+                    <li><a href="../../views/home.html">Home</a></li>
+                    <li><a href="lista_categorias.html" style="text-decoration: underline;">Lista Categorias</a></li>
                 </ul>
             </nav>
         </header>
@@ -32,31 +26,62 @@
                 <tr class="table-dark">
                     <th>#ID</th>
                     <th>Nombre</th>
-                    <th>Acciones</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody id="categorias-lista">
-              
-                <tr></tr>
-
-            </tbody>
+                </tbody>
         </table>
 
         <div class="text-center mt-3">
             <a href="categorias.html" class="btn btn-primary">Agregar Categoría</a>
         </div>
     </div>
-      <div>Autor Marcos Savid</div>
+    <div class="text-center text-muted mt-5"><small>Autor Marcos Savid</small></div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function() {
         
-        $.ajax({
-            url: '../../class/autoload.php',
-            method: 'POST',
-            data: { action: 'listarCategorias' },
-            success: function(response) {
-                $('#categorias-lista').html(response);
+        // 1. FUNCIÓN PARA CARGAR LA LISTA DE CATEGORÍAS
+        function cargarCategorias() {
+            $.ajax({
+                url: '../../class/autoload.php',
+                method: 'POST',
+                data: { action: 'listarCategorias' },
+                success: function(response) {
+                    $('#categorias-lista').html(response);
+                }
+            });
+        }
+
+        cargarCategorias(); // Ejecuta la carga inicial
+
+        // 2. LOGICA PARA ELIMINAR UNA CATEGORÍA
+        $(document).on('click', '.btn-eliminar', function () {
+            const idCategoria = $(this).data('id'); // Capturamos el ID asignado al botón
+            
+            if (confirm('¿Estás seguro de que querés eliminar esta categoría?\n¡¡ATENCIÓN!! Esto también eliminará todos los productos asociados.')) {
+                $.ajax({
+                    url: '../../class/autoload.php',
+                    method: 'POST',
+                    data: { action: 'eliminarCategoria', id: idCategoria }, // Mandamos la acción al backend
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.success) {
+                            alert(res.message);
+                            // Buscamos la fila correspondiente y la removemos con animación
+                            $(`#fila-categoria-${idCategoria}`).fadeOut(400, function() { 
+                                $(this).remove(); 
+                            });
+                        } else {
+                            alert('Error: ' + res.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Error de comunicación con el servidor al eliminar la categoría.');
+                    }
+                });
             }
         });
         

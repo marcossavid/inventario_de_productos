@@ -1,27 +1,30 @@
 https://inventario-de-productos.great-site.net/views/home.html
 
-BAS DE DATOS
--- 1. Crear la tabla de Categorías primero (porque Productos depende de ella)
+-- ============================================================
+-- 1. CREAR LA TABLA DE CATEGORÍAS
+-- ============================================================
 CREATE TABLE IF NOT EXISTS `categorias` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `nombre` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 2. Crear la tabla de Productos con la relación a categorías
+
+-- ============================================================
+-- 2. CREAR LA TABLA DE PRODUCTOS (Sincronizada con el Backend)
+-- ============================================================
 CREATE TABLE IF NOT EXISTS `productos` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `sku` VARCHAR(50) DEFAULT NULL,               -- 🎯 Sku integrado (acepta NULL si viene vacío)
   `nombre` VARCHAR(150) NOT NULL,
-  `imagen` VARCHAR(255) DEFAULT NULL,
-  `descripcion` TEXT NOT NULL,
+  `imagen` VARCHAR(255) DEFAULT NULL,            -- Acepta NULL si no suben foto
+  `cantidad` INT NOT NULL DEFAULT 0,             -- 🎯 COLUMNA CRÍTICA: Controla el stock en tu Home
   `categoria_id` INT NOT NULL,
   `precio` DECIMAL(10, 2) NOT NULL,
   
-  -- Creamos la relación para que guarde el ID numérico de la categoría
+  -- Relación con la tabla de categorías
   CONSTRAINT `fk_productos_categorias` 
     FOREIGN KEY (`categoria_id`) 
     REFERENCES `categorias` (`id`) 
     ON DELETE CASCADE 
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE productos ADD COLUMN sku VARCHAR(50) NOT NULL AFTER nombre;

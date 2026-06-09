@@ -20,18 +20,37 @@ if (isset($_POST['action'])) {
         case 'listarCategorias':
             $categorias = $db->select("SELECT * FROM categorias");
             foreach ($categorias as $cat) {
-                echo "<tr>
-                        <td>{$cat['id']}</td>
-                        <td>{$cat['nombre']}</td>
-                      </tr>";
+                echo "<tr id='fila-categoria-".$cat['id']."'>";
+                echo "<td>".$cat['id']."</td>";
+                echo "<td>".$cat['nombre']."</td>";
+                echo "<td class='text-center'>
+                        <button class='btn btn-danger btn-sm btn-eliminar' data-id='".$cat['id']."'>Eliminar</button>
+                    </td>";
+                echo "</tr>";
             }
+        break;
+
+        // 🎯 NUEVO CASE INDEPENDIENTE: Para procesar la eliminación por AJAX
+        case 'eliminarCategoria':
+            $id = intval($_POST['id']); // Validamos el ID
+            
+            $query = "DELETE FROM categorias WHERE id = $id";
+            
+            // Usamos ->select() que ya sabemos que existe en tu archivo data_base.php
+            $db->select($query); 
+
+            // Devolvemos la respuesta limpia
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Categoría eliminada con éxito.'
+            ]);
+            exit;
         break;
 
         case 'listarProductos':
             $productos = $db->select("SELECT * FROM productos");
 
             foreach ($productos as $prod) {
-
                 // Ruta de imágenes
                 $rutaImagen = "../../assets/img/" . $prod['imagen'];
 
@@ -47,5 +66,4 @@ if (isset($_POST['action'])) {
         break;
     }
 }
-
 ?>
