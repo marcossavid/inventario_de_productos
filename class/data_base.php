@@ -2,10 +2,10 @@
 /*autor Marcos Savid*/
 class DataBase {
 
-    private $host = "127.0.0.1";
-    private $user = "root";
-    private $pass = "";
-    private $db = "miproyecto";
+    private $host = "sql113.infinityfree.com";
+    private $user = "if0_42134387";
+    private $pass = "npJ97WdAme";
+    private $db = "if0_42134387_inventario";
     private $conn;
 
     public function __construct() {
