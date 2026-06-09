@@ -13,8 +13,9 @@ body {
     line-height: 1.6;
 }
 
+
 /* === 2. Encabezado y Logotipo === */
-div:first-of-type {
+.header-contenedor { /* Cambiamos el selector genérico por una clase propia */
     text-align: center;
     margin-bottom: 30px;
     padding-bottom: 15px;

@@ -6,31 +6,53 @@ require_once 'data_base.php';
 class Productos {
     private $id;
     private $nombre;
+    private $sku;
     private $imagen;
-    private $descripcion;
+    private $cantidad; // 🎯 CAMBIO: De $descripcion a $cantidad
     private $categoria;
     private $precio;
     private $db;
 
     public function __construct() {
-        $this->db = new DataBase(); // Con los paréntesis para mantener buenas prácticas
+        $this->db = new DataBase();
     }
 
     // --- Setters ---
     public function setId($id) { $this->id = $id; }
     public function setNombre($nombre) { $this->nombre = $nombre; }
+    public function setSku($sku) { $this->sku = $sku; }
     public function setImagen($imagen) { $this->imagen = $imagen; }
-    public function setDescripcion($descripcion) { $this->descripcion = $descripcion; }
+    public function setCantidad($cantidad) { $this->cantidad = $cantidad; } // 🎯 NUEVO SETTER
     public function setCategoria($categoria) { $this->categoria = $categoria; }
     public function setPrecio($precio) { $this->precio = $precio; }
 
     // --- Guardar producto ---
     public function guardar() {
-        $sql = "INSERT INTO productos (nombre, imagen, descripcion, categoria_id, precio)
-                VALUES (?, ?, ?, ?, ?)";
+        // 🎯 CAMBIO: Mapeamos 'cantidad' en vez de 'descripcion'
+        $sql = "INSERT INTO productos (nombre, sku, imagen, cantidad, categoria_id, precio)
+                VALUES (?, ?, ?, ?, ?, ?)";
 
-        $params = [$this->nombre, $this->imagen, $this->descripcion, $this->categoria, $this->precio];
+        $params = [$this->nombre, $this->sku, $this->imagen, $this->cantidad, $this->categoria, $this->precio];
         return $this->db->insert($sql, $params);
+    }
+
+    // --- Actualizar producto ---
+    public function actualizar() {
+        if ($this->imagen !== NULL) {
+            // 🎯 CAMBIO: Agregamos 'cantidad' en el UPDATE con imagen
+            $sql = "UPDATE productos 
+                    SET nombre = ?, sku = ?, imagen = ?, cantidad = ?, categoria_id = ?, precio = ? 
+                    WHERE id = ?";
+            $params = [$this->nombre, $this->sku, $this->imagen, $this->cantidad, $this->categoria, $this->precio, $this->id];
+            return $this->db->update($sql, $params);
+        } else {
+            // 🎯 CAMBIO: Agregamos 'cantidad' en el UPDATE sin imagen
+            $sql = "UPDATE productos 
+                    SET nombre = ?, sku = ?, cantidad = ?, categoria_id = ?, precio = ? 
+                    WHERE id = ?";
+            $params = [$this->nombre, $this->sku, $this->cantidad, $this->categoria, $this->precio, $this->id];
+            return $this->db->update($sql, $params);
+        }
     }
 
     // --- Eliminar producto ---
@@ -42,13 +64,13 @@ class Productos {
 
     // api: join entre la tabla productos y categoria
     public function listarConCategorias() {
-        $sql = "SELECT p.id, p.nombre, p.precio, p.descripcion, p.imagen, 
+        // 🎯 CAMBIO: Traemos la columna 'p.cantidad' de la base de datos
+        $sql = "SELECT p.id, p.sku, p.nombre, p.precio, p.cantidad, p.imagen, 
                 c.nombre AS categoria
                 FROM productos p
                 INNER JOIN categorias c
                 ON p.categoria_id = c.id";
                 
-        // Usamos de manera directa el $this->db que se creó en el constructor
         return $this->db->select($sql);
     }
 }

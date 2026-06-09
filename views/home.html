@@ -4,190 +4,314 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
-     <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     <title>Tienda - Home</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            background: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; 
+            color: #333333;
         }
 
-       
+        .main-content {
+            padding-top: 40px;
+            padding-bottom: 60px;
+        }
+
         .logo {
-            height: 70px;
+            height: 70px; 
         }
 
-        .product-card {
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            height: 400px;
+        .dashboard-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            padding: 24px;
         }
 
-        .product-card:hover {
-            transform: scale(1.03);
+        .row > [class^="col-"], 
+        .row > [class*=" col-"] {
+            border-bottom: none !important;
+            padding-bottom: 0;
+            margin-bottom: 0;
         }
 
-        .product-image {
-            height: 150px;
-            width: 100%;
-            object-fit: contain;
-            margin-bottom: 15px;
+        .table {
+            margin-bottom: 0;
+            vertical-align: middle; 
         }
 
-
-        .admin-buttons {
-            margin-top: 30px;
-            text-align: center;
+        .table th {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #c4c4c4;
+            padding: 14px 16px;
         }
 
-        .admin-buttons a {
-            text-decoration: none;
-            color: white;
+        .table td {
+            padding: 16px;
+            color: #2d3748;
         }
     </style>
 </head>
 <body>
     
-     <header>
-            <nav class="navbar">
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="" style="text-decoration: underline;">Home</a></li>
+                <li><a href="../backend/views/lista_categories.html">Lista Categorias</a></li>
+            </ul>
+            <img src="../assets/img/logo.png" class="logo" alt="Logo de la empresa">
+        </nav>
+    </header>
 
-                <ul class="nav-links">
-                       <li><a href=""style = "text-decoration: underline;">Home</a></li>
-
-                     <li><a href="../backend/views/lista_categorias.html">Lista Categorias</a></li>
-                      
-                
-                </ul>
-                  <img src="../assets/img/logo.png" class="logo" alt="Logo de la empresa">
-            </nav>
-        </header>
-    <!--LISTA DES PRODUCTOS-->
-    <div class="container mt-4">
-         <div class="admin-buttons">
-            <button class="btn btn-primary mx-2">
-                <a href="../backend/views/categorias.html">Agregar Categoría</a>
-            </button>
-            <button class="btn btn-success mx-2">
-                <a href="../backend/views/productos.html">Agregar Producto</a>
-            </button>
+    <div class="container main-content">
+        
+        <div class="row align-items-end g-3 mb-4">
+            <div class="col-12 col-md-6 col-lg-7 d-flex gap-2 admin-buttons">
+                <a href="../backend/views/categorias.html" class="btn btn-primary">Agregar Categoría</a>
+                <a href="../backend/views/productos.html" class="btn btn-success">Agregar Producto</a>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-5" style="border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important;">
+                <div class="d-flex align-items-center justify-content-md-end gap-2" style="border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important;">
+                    <label for="filtro-categoria" class="form-label fw-bold mb-0 text-nowrap" style="color: #4a5568;">Filtrar por Categoría:</label>
+                    <select id="filtro-categoria" class="form-select" style="max-width: 250px; border-radius: 8px; box-shadow: none !important;">
+                        <option value="todos">Mostrar todas</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <div class="container mt-5">
-        <h1 class="text-center mb-4">Listado de Productos</h1>
-
-        <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Acciones</th> </tr>
-    </thead>
-    <tbody id="productos-lista">
-        </tbody>
-</table>
+        <div class="dashboard-card">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Código / SKU</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th class="text-center">Cant. (Stock)</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productos-lista">
+                </tbody>
+            </table>
+        </div>
     </div>
 
-       <!-- <h2 class="text-center mb-4">My Store</h2>
-        <div id="productos-container" class="row g-4">
-            </div> -->
+    <div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="modalEditarLabel">Editar Producto</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-editar-producto" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="edit-id">
+                        <input type="hidden" name="action" value="editar">
 
-       
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Código / SKU</label>
+                            <input type="text" class="form-control" name="sku" id="edit-sku" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nombre del Producto</label>
+                            <input type="text" class="form-control" name="nombre" id="edit-nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cantidad (Stock)</label>
+                            <input type="number" class="form-control" name="cantidad" id="edit-cantidad" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Categoría</label>
+                            <select class="form-select" name="categoria" id="edit-categoria" required>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Precio ($)</label>
+                            <input type="number" class="form-control" name="precio" id="edit-precio" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Imagen (Opcional)</label>
+                            <input type="file" class="form-control" name="imagen">
+                            <small class="text-muted">Dejá este campo vacío si no querés cambiar la imagen actual.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-       // $(document).ready(function () {
-          //  $.ajax({
-            //    url: '../index.php',
-              //  type: "POST",
-                //data: { action: "listarHome" },
-                //success: function (response) {
-                  //  $("#productos-container").html(response);
-                //}
-            //});
-       // });
-  
         $(document).ready(function () {
-        // 1. CARGAR LOS PRODUCTOS AL INICIAR
-        // Apuntamos al controlador de productos que es el encargado de hablar con la clase
-        $.ajax({
-            url: '../backend/productos.php', 
-            method: 'GET', // Usamos GET para listar
-            data: { action: 'listarHome' }, 
-            success: function (response) {
-                // El backend nos va a devolver los productos en JSON y los dibujamos acá
-                let html = '';
-                if(response.length > 0) {
-                    response.forEach(prod => {
-                        html += `
-                            <tr id="fila-producto-${prod.id}">
-                                <td>${prod.id}</td>
-                                <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain;"></td>
-                                <td>${prod.nombre}</td>
-                                <td>${prod.descripcion}</td>
-                                <td>${prod.categoria}</td>
-                                <td>$${prod.precio}</td>
-                                text-align: center;
-                                <td>
-                                    <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">
-                                        Eliminar
-                                    </button>
-                                </td>
-                            </tr>
-                        `;
-                    });
-                } else {
-                    html = '<tr><td colspan="7" class="text-center">No hay productos registrados</td></tr>';
-                }
-                $('#productos-lista').html(html);
-            },
-            error: function() {
-                $('#productos-lista').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar productos</td></tr>');
-            }
-        });
-
-        // 2. EVENTO PARA ELIMINAR EL PRODUCTO AL HACER CLIC
-        $(document).on('click', '.btn-eliminar', function () {
-            const idProducto = $(this).data('id');
             
-            if (confirm('¿Estás seguro de que querés eliminar este producto?')) {
+            // 1. CARGAR LAS CATEGORÍAS EN LOS SELECTS (Filtro y Modal)
+            $.ajax({
+                url: '../backend/productos.php',
+                method: 'GET',
+                success: function (categorias) {
+                    if(Array.isArray(categorias) && categorias.length > 0) {
+                        categorias.forEach(cat => {
+                            // Carga en el filtro del Home
+                            $('#filtro-categoria').append(`<option value="${cat.nombre}">${cat.nombre}</option>`);
+                            // Carga en el selector del Modal de Edición (guarda ID por detrás)
+                            $('#edit-categoria').append(`<option value="${cat.id}" data-nombre="${cat.nombre}">${cat.nombre}</option>`);
+                        });
+                    }
+                }
+            });
+
+            // 2. CARGAR LOS PRODUCTOS AL INICIAR
+            function cargarProductos() {
+                $.ajax({
+                    url: '../backend/productos.php', 
+                    method: 'GET', 
+                    data: { action: 'listarHome' }, 
+                    success: function (response) {
+                        let html = '';
+                        if(response.length > 0) {
+                            response.forEach(prod => {
+                                html += `
+                                    <tr id="fila-producto-${prod.id}" class="fila-producto" data-categoria="${prod.categoria}">
+                                        <td><span class="badge bg-light text-dark border fw-semibold">${prod.sku || 'S/S'}</span></td>
+                                        <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain;"></td>
+                                        <td class="prod-nombre">${prod.nombre}</td>
+                                        <td class="prod-cant fw-bold text-center">${prod.cantidad || 0} u.</td>
+                                        <td class="prod-cat">${prod.categoria}</td>
+                                        <td class="prod-precio">$${prod.precio}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary btn-sm btn-editar me-1" 
+                                                    data-id="${prod.id}" 
+                                                    data-sku="${prod.sku || ''}"
+                                                    data-precio="${prod.precio}">
+                                                Editar
+                                            </button>
+                                            <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                        } else {
+                            html = '<tr><td colspan="7" class="text-center">No hay productos registrados</td></tr>';
+                        }
+                        $('#productos-lista').html(html);
+                    }
+                });
+            }
+            
+            cargarProductos(); // Ejecuta la carga inicial
+
+            // 3. LOGICA DEL FILTRO
+            $('#filtro-categoria').on('change', function() {
+                const categoriaSeleccionada = $(this).val();
+                if (categoriaSeleccionada === 'todos') {
+                    $('.fila-producto').fadeIn(300);
+                } else {
+                    $('.fila-producto').hide();
+                    $(`.fila-producto[data-categoria="${categoriaSeleccionada}"]`).fadeIn(300);
+                }
+            });
+
+            // 4. EVENTO ELIMINAR
+            $(document).on('click', '.btn-eliminar', function () {
+                const idProducto = $(this).data('id');
+                if (confirm('¿Estás seguro de que querés eliminar este producto?')) {
+                    $.ajax({
+                        url: '../backend/productos.php',
+                        method: 'POST',
+                        data: { action: 'eliminar', id: idProducto },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.success) {
+                                alert(res.message);
+                                $(`#fila-producto-${idProducto}`).fadeOut(400, function() { $(this).remove(); });
+                            } else {
+                                alert('Error: ' + res.message);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // 5. EVENTO CLIC EN EDITAR: LEVANTA EL MODAL Y CARGA LOS DATOS ACTUALES
+            $(document).on('click', '.btn-editar', function() {
+                const id = $(this).data('id');
+                const sku = $(this).data('sku');
+                const precio = $(this).data('precio');
+                
+                // Buscamos los textos directamente desde las celdas de la fila clickeada
+                const fila = $(`#fila-producto-${id}`);
+                const nombre = fila.find('.prod-nombre').text();
+                // 🎯 CAMBIO: Extraemos la cantidad de la celda y removemos el " u." usando parseInt
+                const cantidad = parseInt(fila.find('.prod-cant').text()) || 0;
+                const categoriaTexto = fila.find('.prod-cat').text();
+
+                // Seteamos los valores en los campos del formulario modal
+                $('#edit-id').val(id);
+                $('#edit-sku').val(sku);
+                $('#edit-nombre').val(nombre);
+                $('#edit-cantidad').val(cantidad); // 🎯 CAMBIO: Pasamos la cantidad al input del modal
+                $('#edit-precio').val(precio);
+                
+                // Selecciona la categoría correcta buscando por el texto de la opción
+                $(`#edit-categoria option`).filter(function() {
+                    return $(this).data('nombre') === categoriaTexto;
+                }).prop('selected', true);
+
+                // Mostramos el modal flotante
+                $('#modalEditarProducto').modal('show');
+            });
+
+            // 6. SUBMIT DEL FORMULARIO DE EDICIÓN VIA AJAX
+            $('#form-editar-producto').on('submit', function(e) {
+                e.preventDefault();
+                
+                let formData = new FormData(this);
+
                 $.ajax({
                     url: '../backend/productos.php',
                     method: 'POST',
-                    data: { 
-                        action: 'eliminar', 
-                        id: idProducto 
-                    },
+                    data: formData,
+                    processData: false, 
+                    contentType: false, 
                     dataType: 'json',
-                    success: function (res) {
-                        if (res.success) {
+                    success: function(res) {
+                        if(res.success) {
                             alert(res.message);
-                            // Borramos la fila de la tabla al toque con una animación sutil
-                            $(`#fila-producto-${idProducto}`).fadeOut(400, function() {
-                                $(this).remove();
-                            });
+                            $('#modalEditarProducto').modal('hide');
+                            cargarProductos(); // Recargamos la lista limpia con los nuevos stocks
                         } else {
                             alert('Error: ' + res.message);
                         }
                     },
-                    error: function () {
-                        alert('Error de conexión con el servidor al intentar eliminar.');
+                    error: function() {
+                        alert('Error de comunicación con el servidor al editar.');
                     }
                 });
-            }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
