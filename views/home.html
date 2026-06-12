@@ -14,12 +14,12 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; 
+            background-color: #eef0f3; 
             color: #333333;
         }
 
         .main-content {
-            padding-top: 40px;
+            padding-top: 20px;
             padding-bottom: 60px;
         }
 
@@ -27,38 +27,107 @@
             height: 70px; 
         }
 
+        /* Contenedor principal de la tabla (Formato Tarjeta Limpia) */
         .dashboard-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            padding: 24px;
+            padding: 0 !important; 
+            overflow: hidden;       
         }
 
-        .row > [class^="col-"], 
-        .row > [class*=" col-"] {
-            border-bottom: none !important;
-            padding-bottom: 0;
-            margin-bottom: 0;
+        /* Estilización simétrica para la barra de filtros */
+        .main-content .form-control, 
+        .main-content .form-select {
+            height: 42px !important;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px !important;
         }
 
-        .table {
+        .form-control:focus, .form-select:focus {
+            border-color: #94a3b8;
+            box-shadow: none !important;
+        }
+
+        /* ============================================================
+           🎯 ELIMINACIÓN TOTAL DE BORDES Y LÍNEAS RESIDUALES DE TABLA
+           ============================================================ */
+        .dashboard-card .table {
             margin-bottom: 0;
             vertical-align: middle; 
+            border: none !important;
+            border-collapse: collapse !important;
+            --bs-table-border-color: transparent !important;
+            --bs-table-accent-bg: transparent !important;
+            --bs-table-bg: transparent !important;
+            --bs-table-striped-bg: transparent !important;
         }
 
-        .table th {
+        .dashboard-card .table th, 
+        .dashboard-card .table td,
+        .dashboard-card .table tr {
+            border: none !important;
+            border-width: 0 !important;
+            box-shadow: none !important;
+        }
+
+        /* Encabezado Oscuro */
+        .dashboard-card .table th {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #c4c4c4;
+            color: #94a3b8 !important;
             padding: 14px 16px;
+            background-color: #1e293b !important;
         }
 
-        .table td {
-            padding: 16px;
+        /* Celdas Limpias */
+        .dashboard-card .table td {
+            padding: 14px 16px;
             color: #2d3748;
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #f1f5f9 !important; /* Divisor sutil */
+        }
+
+        /* Efecto Hover */
+        .table-hover tbody tr:hover td {
+            background-color: #f8fafc !important;
+            transition: background-color 0.15s ease;
+        }
+
+        .table .btn-sm {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 5px 12px;
+        }
+        
+        /* 🚨 ANIQUILACIÓN DE LÍNEAS RESIDUALES Y BORDES RAROS 🚨 */
+        .main-content hr, 
+        .main-content form hr {
+            display: none !important;
+        }
+
+        /* Forzamos a que los inputs fuera de los formularios no tengan margen sobrante */
+        #buscador-sku, #filtro-categoria {
+            margin-bottom: 0px !important;
+            margin-top: 0px !important;
+        }
+
+        /* 🚨 BORRADO DEFINITIVO DE LA LÍNEA REBELDE 🚨 */
+        .container.main-content > div,
+        .main-content,
+        [class*="flex-column"] {
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Tarjeta de la tabla */
+        .dashboard-card {
+            border: 1px solid #e2e8f0 !important;
+            margin-top: 25px !important;
         }
     </style>
 </head>
@@ -69,48 +138,70 @@
             <ul class="nav-links">
                 <li><a href="" style="text-decoration: underline;">Home</a></li>
                 <li><a href="../backend/views/lista_categorias.html">Lista Categorias</a></li>
+                <li><a href="../backend/views/reportes.html">Reportes</a></li>
             </ul>
             <img src="../assets/img/logo.png" class="logo" alt="Logo de la empresa">
         </nav>
     </header>
 
-    <div class="container main-content">
+   <div class="container main-content">
         
-        <div class="row align-items-end g-3 mb-4">
-            <div class="col-12 col-md-6 col-lg-7 d-flex gap-2 admin-buttons">
-                <a href="../backend/views/categorias.html" class="btn btn-primary">Agregar Categoría</a>
-                <a href="../backend/views/productos.html" class="btn btn-success">Agregar Producto</a>
-            </div>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3" style="border: none !important; margin-bottom: 25px !important; padding: 0 !important; background: transparent !important; box-shadow: none !important;">
             
-            <div class="col-12 col-md-6 col-lg-5" style="border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important;">
-                <div class="d-flex align-items-center justify-content-md-end gap-2" style="border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important;">
-                    <label for="filtro-categoria" class="form-label fw-bold mb-0 text-nowrap" style="color: #4a5568;">Filtrar por Categoría:</label>
-                    <select id="filtro-categoria" class="form-select" style="max-width: 250px; border-radius: 8px; box-shadow: none !important;">
-                        <option value="todos">Mostrar todas</option>
+            <div class="d-flex flex-column flex-sm-row align-items-center gap-2 flex-grow-1" style="max-width: 650px; width: 100%;">
+                
+                <div class="w-100" style="max-width: 350px; border: none !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important;">
+                    <input type="text" id="buscador-sku" class="form-control" placeholder="Buscar por código SKU..." 
+                           style="height: 42px !important; 
+                                  border-radius: 8px !important; 
+                                  border: 1px solid #cbd5e1 !important; 
+                                  margin: 0 !important; 
+                                  padding-bottom: 6px !important; 
+                                  padding-top: 6px !important;
+                                  box-shadow: none !important; 
+                                  background-image: none !important;">
+                </div>
+                
+                <div class="w-100" style="max-width: 240px; margin: 0 !important; padding: 0 !important;">
+                    <select id="filtro-categoria" class="form-select" style="height: 42px !important; border-radius: 8px !important; border: 1px solid #cbd5e1 !important; margin: 0 !important; box-shadow: none !important;">
+                        <option value="todos">Todas las categorías</option>
                     </select>
                 </div>
+
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mt-2 mt-md-0">
+                <a href="../backend/views/categorias.html" class="btn btn-outline-primary fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" style="border-radius: 8px !important; height: 42px !important; padding: 0 16px !important; margin: 0 !important; font-size: 0.95rem;">
+                    + Categoría
+                </a>
+                <a href="../backend/views/productos.html" class="btn btn-success fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" style="border-radius: 8px !important; height: 42px !important; padding: 0 16px !important; margin: 0 !important; font-size: 0.95rem; color: white !important;">
+                    + Nuevo Producto
+                </a>
+            </div>
+
+        </div>
+        <div class="dashboard-card">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="ps-4">SKU</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th class="text-center">Stock</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th class="text-center pe-4">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productos-lista">
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="dashboard-card">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Código / SKU</th>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th class="text-center">Cant. (Stock)</th>
-                        <th>Categoría</th>
-                        <th>Precio</th>
-                        <th class="text-center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="productos-lista">
-                </tbody>
-            </table>
-        </div>
     </div>
-
+<!--MODAL DE EDITAR PRODUCTO -------------------------->
     <div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -165,16 +256,14 @@
     <script>
         $(document).ready(function () {
             
-            // 1. CARGAR LAS CATEGORÍAS EN LOS SELECTS (Filtro y Modal)
+            // 1. CARGAR LAS CATEGORÍAS EN LOS SELECTS
             $.ajax({
                 url: '../backend/productos.php',
                 method: 'GET',
                 success: function (categorias) {
                     if(Array.isArray(categorias) && categorias.length > 0) {
                         categorias.forEach(cat => {
-                            // Carga en el filtro del Home
                             $('#filtro-categoria').append(`<option value="${cat.nombre}">${cat.nombre}</option>`);
-                            // Carga en el selector del Modal de Edición (guarda ID por detrás)
                             $('#edit-categoria').append(`<option value="${cat.id}" data-nombre="${cat.nombre}">${cat.nombre}</option>`);
                         });
                     }
@@ -194,21 +283,23 @@
                                 html += `
                                     <tr id="fila-producto-${prod.id}" class="fila-producto" data-categoria="${prod.categoria}">
                                         <td><span class="badge bg-light text-dark border fw-semibold">${prod.sku || 'S/S'}</span></td>
-                                        <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain;"></td>
+                                        <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain; max-height: 50px;"></td>
                                         <td class="prod-nombre">${prod.nombre}</td>
                                         <td class="prod-cant fw-bold text-center">${prod.cantidad || 0} u.</td>
                                         <td class="prod-cat">${prod.categoria}</td>
                                         <td class="prod-precio">$${prod.precio}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-primary btn-sm btn-editar me-1" 
-                                                    data-id="${prod.id}" 
-                                                    data-sku="${prod.sku || ''}"
-                                                    data-precio="${prod.precio}">
-                                                Editar
-                                            </button>
-                                            <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">
-                                                Eliminar
-                                            </button>
+                                            <div class="d-flex justify-content-center gap-1">
+                                                <button class="btn btn-primary btn-sm btn-editar" 
+                                                        data-id="${prod.id}" 
+                                                        data-sku="${prod.sku || ''}"
+                                                        data-precio="${prod.precio}">
+                                                    Editar
+                                                </button>
+                                                <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">
+                                                    Eliminar
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 `;
@@ -221,18 +312,31 @@
                 });
             }
             
-            cargarProductos(); // Ejecuta la carga inicial
+            cargarProductos();
 
-            // 3. LOGICA DEL FILTRO
-            $('#filtro-categoria').on('change', function() {
-                const categoriaSeleccionada = $(this).val();
-                if (categoriaSeleccionada === 'todos') {
-                    $('.fila-producto').fadeIn(300);
-                } else {
-                    $('.fila-producto').hide();
-                    $(`.fila-producto[data-categoria="${categoriaSeleccionada}"]`).fadeIn(300);
-                }
-            });
+            // 3. LÓGICA DE FILTROS COMBINADOS (SKU + Categoría) EN TIEMPO REAL
+            function aplicarFiltros() {
+                const skuBuscado = $('#buscador-sku').val().toLowerCase().trim();
+                const categoriaSeleccionada = $('#filtro-categoria').val();
+
+                $('.fila-producto').each(function() {
+                    const fila = $(this);
+                    const filaSku = fila.find('td:first-child span').text().toLowerCase().trim();
+                    const filaCategoria = fila.data('categoria');
+
+                    const coincideSku = (skuBuscado === '' || filaSku.includes(skuBuscado));
+                    const coincideCategoria = (categoriaSeleccionada === 'todos' || filaCategoria === categoriaSeleccionada);
+
+                    if (coincideSku && coincideCategoria) {
+                        fila.fadeIn(120);
+                    } else {
+                        fila.hide();
+                    }
+                });
+            }
+
+            $('#filtro-categoria').on('change', aplicarFiltros);
+            $('#buscador-sku').on('keyup input', aplicarFiltros);
 
             // 4. EVENTO ELIMINAR
             $(document).on('click', '.btn-eliminar', function () {
@@ -255,42 +359,35 @@
                 }
             });
 
-            // 5. EVENTO CLIC EN EDITAR: LEVANTA EL MODAL Y CARGA LOS DATOS ACTUALES
+            // 5. EVENTO CLIC EN EDITAR
             $(document).on('click', '.btn-editar', function() {
                 const id = $(this).data('id');
                 const sku = $(this).data('sku');
                 const precio = $(this).data('precio');
                 
-                // Buscamos los textos directamente desde las celdas de la fila clickeada
                 const fila = $(`#fila-producto-${id}`);
                 const nombre = fila.find('.prod-nombre').text();
-                // 🎯 CAMBIO: Extraemos la cantidad de la celda y removemos el " u." usando parseInt
                 const cantidad = parseInt(fila.find('.prod-cant').text()) || 0;
                 const categoriaTexto = fila.find('.prod-cat').text();
 
-                // Seteamos los valores en los campos del formulario modal
                 $('#edit-id').val(id);
                 $('#edit-sku').val(sku);
                 $('#edit-nombre').val(nombre);
-                $('#edit-cantidad').val(cantidad); // 🎯 CAMBIO: Pasamos la cantidad al input del modal
+                $('#edit-cantidad').val(cantidad); 
                 $('#edit-precio').val(precio);
                 
-                // Selecciona la categoría correcta buscando por el texto de la opción
                 $(`#edit-categoria option`).filter(function() {
                     return $(this).data('nombre') === categoriaTexto;
                 }).prop('selected', true);
 
-                // Mostramos el modal flotante
                 $('#modalEditarProducto').modal('show');
             });
 
-           // 6. SUBMIT DEL FORMULARIO DE EDICIÓN VIA AJAX
+            // 6. SUBMIT DEL FORMULARIO DE EDICIÓN
             $('#form-editar-producto').on('submit', function(e) {
-                e.preventDefault(); // Evita que la página se recargue cambie la URL
+                e.preventDefault(); 
                 
                 let formData = new FormData(this);
-                
-                // 🎯 LÍNEA CRÍTICA AGREGADA: Le avisa a productos.php que la acción es "editar"
                 formData.append('action', 'editar'); 
 
                 $.ajax({
@@ -304,17 +401,17 @@
                         if(res.success) {
                             alert(res.message);
                             $('#modalEditarProducto').modal('hide');
-                            cargarProductos(); // Recargamos la lista limpia con los nuevos stocks
+                            cargarProductos(); 
                         } else {
                             alert('Error: ' + res.message);
                         }
                     },
                     error: function() {
                         alert('Error de comunicación con el servidor al editar.');
-             }
+                    }
                 });
-            }); // 🎯 CORREGIDO: Se cerró correctamente el evento submit
-        }); //
+            }); 
+        }); 
     </script>
 </body>
 </html>

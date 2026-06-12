@@ -48,28 +48,28 @@ h1 {
 }
 
 label {
-    display: block; /* Hace que la etiqueta ocupe su propia línea */
+    display: block; 
     margin-top: 15px;
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
 
-/* Estilo para campos de texto, número y textarea */
-input[type="text"], 
-input[type="number"],
-input[type="file"],
-textarea {
+/* 🎯 SOLUCIÓN RAÍZ: Ahora solo aplica a inputs que están REALMENTE dentro de un <form> de creación */
+form input[type="text"], 
+form input[type="number"],
+form input[type="file"],
+form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Asegura que el padding no cambie el ancho total */
+    box-sizing: border-box; 
 }
 
-textarea {
-    resize: vertical; /* Permite al usuario solo cambiar la altura */
+form textarea {
+    resize: vertical; 
 }
 
 /* === 4. Estilos de Botones === */
@@ -117,7 +117,78 @@ h1:last-of-type {
 
 
 
+/* ============================================================
+           CSS OPTIMIZADO PARA LA BARRA UNIFICADA Y TABLA
+           ============================================================ */
+        
+        /* Contenedor principal de la tabla (Quitamos paddings internos) */
+        .dashboard-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            padding: 0 !important; /* 🎯 Clave: Permitimos que la tabla ocupe todo el ancho */
+            overflow: hidden;       /* Mantiene las esquinas de la tabla redondeadas */
+        }
 
+        /* Altura uniforme y bordes suaves para los controles de la barra */
+        .form-control, .form-select, .input-group-text, .admin-buttons .btn {
+            height: 42px; /* Forzamos a que todo mida exactamente lo mismo en la línea */
+            font-size: 0.95rem;
+        }
+
+        /* Estilo integrado para el buscador de SKU */
+        .input-group-text {
+            border-color: #dee2e6;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #cbd5e1;
+            box-shadow: none !important; /* Eliminamos el resplandor azul por defecto de Bootstrap */
+        }
+
+        /* Estilizado fino para los encabezados de la tabla */
+        .table th {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8 !important; /* Gris sutil para el texto de los th */
+            padding: 14px 16px;
+            border: none !important;
+        }
+
+        /* Filas de la tabla con líneas divisorias delgadas y limpias */
+        .table td {
+            padding: 14px 16px;
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9 !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        /* Efecto Hover interactivo al pasar el mouse por las filas */
+        .table-hover tbody tr:hover {
+            background-color: #f8fafc !important;
+            transition: background-color 0.15s ease;
+        }
+
+        /* Redondeado de los botones de acción dentro de las filas */
+        .table .btn-sm {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 5px 10px;
+        }
+
+        /* Insignia del SKU (Badge) */
+        .badge {
+            font-size: 0.8rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
 
 
 

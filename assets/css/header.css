@@ -1,8 +1,9 @@
 header {
-    background: linear-gradient(135deg, #3a7bd5, #3a6073);
+    background: #1e293b;
     padding: 15px 0;
     display: flex;
     margin-bottom: 40px;
+    border-radius: 8px;
 }
 
 .navbar {
