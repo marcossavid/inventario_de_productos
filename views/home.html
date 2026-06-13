@@ -15,7 +15,6 @@
     <style>
       
     .main-content { padding-top: 20px; padding-bottom: 60px; }
-    .logo { height: 70px; }
     
     /* Solo cosas muy puntuales que no quieras repetir en otras páginas */
     .table .btn-sm { border-radius: 6px; font-weight: 500; padding: 5px 12px; }
@@ -26,13 +25,16 @@
     
     <header>
         <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="" style="text-decoration: underline;">Home</a></li>
-                <li><a href="../backend/views/lista_categorias.html">Lista Categorias</a></li>
-                <li><a href="../backend/views/reportes.html">Reportes</a></li>
-            </ul>
-            <img src="../assets/img/logo.png" class="logo" alt="Logo de la empresa">
-        </nav>
+        <img src="../assets/img/logo.png" class="logo" alt="Logo">
+        
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="../backend/views/lista_categorias.html">Lista Categorías</a></li>
+            <li><a href="../backend/views/reportes.html">Reportes</a></li>
+        </ul>
+    </nav>
     </header>
 
    <div class="container main-content">
@@ -155,6 +157,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
    <script>
+    function toggleMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.toggle('active');
+    }
     // 0. Variable global para almacenar los datos y poder descargarlos
     let listaProductos = []; 
 

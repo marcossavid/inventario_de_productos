@@ -95,6 +95,6 @@ form label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: 
 /* ============================================================
    COMPONENTES: ELEMENTOS VARIOS (LOGOS, BADGES)
    ============================================================ */
-.logo { max-width: 150px; height: auto; }
+
 .badge { font-size: 0.8rem; padding: 6px 10px; border-radius: 6px; }
 

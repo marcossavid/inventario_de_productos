@@ -1,34 +1,75 @@
+/* header.css */
+
 header {
     background: #1e293b;
     padding: 15px 0;
-    display: flex;
     margin-bottom: 40px;
     border-radius: 8px;
+    position: relative;
+    width: 100%;
 }
 
 .navbar {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Empuja el logo a la izquierda y el contenido a la derecha */
     align-items: center;
+    position: relative;
+    flex-wrap: nowrap; /* Evita que el botón se salte de línea */
 }
 
-
+/* Forzamos al contenedor de links a ocupar el espacio correcto */
 .nav-links {
     list-style: none;
     display: flex;
     gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center; /* Alineación vertical */
 }
 
 .nav-links a {
     color: #f1f1f1;
     text-decoration: none;
     font-size: 16px;
-    display: flex;
 }
 
-.nav-links a:hover {
-    text-decoration: underline;
+.logo {
+    height: 35px;
 }
 
+/* Botón hamburguesa */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* RESPONSIVE - Solo para pantallas móviles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block !important;
+    }
+
+    .nav-links {
+        display: none !important; /* Oculto por defecto en móvil */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #1e293b;
+        padding: 20px 0;
+        text-align: center;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        display: flex !important;
+    }
+}
