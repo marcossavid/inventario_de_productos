@@ -1,35 +1,86 @@
-/*
- * Archivo: styles.css
- * Ubicación esperada: assets/css/
- */
-
-/* === 1. Configuración Global y Tipografía === */
+/* ============================================================
+   ESTILOS GLOBALES Y CONFIGURACIÓN BASE
+   ============================================================ */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9; /* Color de fondo muy claro */
-    color: #333; /* Color de texto principal */
+    font-family: 'Inter', sans-serif;
+    background-color: #eef0f3; 
+    color: #333333;
     margin: 0;
     padding: 20px;
     line-height: 1.6;
 }
 
+/* ============================================================
+   COMPONENTES: BOTONES "PILL" Y ACCIONES
+   ============================================================ */
+.btn-pill {
+    border-radius: 50px !important;
+    padding: 8px 24px !important;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+.btn-descargar-custom { background-color: #717d8a !important; color: white !important; }
+.btn-categoria-custom { border: 1px solid #0d6efd !important; color: #0d6efd !important; background: transparent !important; }
+.btn-nuevo-custom { background-color: #198754 !important; color: white !important; }
 
-/* === 2. Encabezado y Logotipo === */
-.header-contenedor { /* Cambiamos el selector genérico por una clase propia */
-    text-align: center;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #ddd;
+/* ============================================================
+   COMPONENTES: TABLA Y TARJETA (DASHBOARD)
+   ============================================================ */
+.dashboard-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    padding: 0 !important;
+    overflow: hidden;
+    margin-top: 25px !important;
 }
 
-.logo {
-    max-width: 150px;
-    height: auto;
-    margin-bottom: 2px;
+.dashboard-card .table { 
+    margin-bottom: 0; 
+    vertical-align: middle; 
+    border: none !important; 
 }
 
+.dashboard-card .table th { 
+    background-color: #1e293b !important; 
+    color: #94a3b8 !important; 
+    text-transform: uppercase; 
+    font-size: 0.75rem; 
+    padding: 14px 16px; 
+    border: none !important;
+}
 
-/* === 3. Estilos de Formularios (Categorias y Productos) === */
+.dashboard-card .table td { 
+    padding: 14px 16px; 
+    color: #2d3748; 
+    border-bottom: 1px solid #f1f5f9 !important; 
+    border-top: none !important;
+}
+
+.table-hover tbody tr:hover td { background-color: #f8fafc !important; transition: background-color 0.15s ease; }
+
+.table .btn-sm { border-radius: 6px; font-weight: 500; padding: 5px 12px; }
+
+/* ============================================================
+   COMPONENTES: FORMULARIOS E INPUTS
+   ============================================================ */
+.form-control, .form-select {
+    height: 42px !important;
+    font-size: 0.95rem;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #94a3b8 !important;
+    box-shadow: none !important;
+}
+
+/* Estilos específicos para formularios de edición/creación (Backends) */
 form {
     background-color: #fff;
     padding: 30px;
@@ -39,157 +90,11 @@ form {
     margin: 20px auto;
 }
 
-h1 {
-    font-size: 1.5em;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block; 
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-/* 🎯 SOLUCIÓN RAÍZ: Ahora solo aplica a inputs que están REALMENTE dentro de un <form> de creación */
-form input[type="text"], 
-form input[type="number"],
-form input[type="file"],
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-}
-
-form textarea {
-    resize: vertical; 
-}
-
-/* === 4. Estilos de Botones === */
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
-    margin-top: 20px;
-}
-
-/* Botón Guardar/Submit */
-button[type="submit"] {
-    background-color: #28a745; /* Verde para la acción principal (Guardar) */
-    color: white;
-}
-
-button[type="submit"]:hover {
-    background-color: #218838;
-}
-
-/* Botón Cancelar/Tipo button */
-button[type="button"] {
-    background-color: #dc3545; /* Rojo para la acción secundaria (Cancelar) */
-    color: white;
-}
-
-button[type="button"]:hover {
-    background-color: #c82333;
-}
-
-/* Estilo para el título de la sección "Settings in Columns" */
-h1:last-of-type {
-    text-align: center;
-    margin-top: 40px;
-    color: #6c757d;
-    font-size: 1.2em;
-    font-style: italic;
-    border-bottom: none;
-}
-
-
-
+form label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: bold; color: #555; }
 
 /* ============================================================
-           CSS OPTIMIZADO PARA LA BARRA UNIFICADA Y TABLA
-           ============================================================ */
-        
-        /* Contenedor principal de la tabla (Quitamos paddings internos) */
-        .dashboard-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            padding: 0 !important; /* 🎯 Clave: Permitimos que la tabla ocupe todo el ancho */
-            overflow: hidden;       /* Mantiene las esquinas de la tabla redondeadas */
-        }
-
-        /* Altura uniforme y bordes suaves para los controles de la barra */
-        .form-control, .form-select, .input-group-text, .admin-buttons .btn {
-            height: 42px; /* Forzamos a que todo mida exactamente lo mismo en la línea */
-            font-size: 0.95rem;
-        }
-
-        /* Estilo integrado para el buscador de SKU */
-        .input-group-text {
-            border-color: #dee2e6;
-            color: #a0aec0;
-            font-size: 0.9rem;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: #cbd5e1;
-            box-shadow: none !important; /* Eliminamos el resplandor azul por defecto de Bootstrap */
-        }
-
-        /* Estilizado fino para los encabezados de la tabla */
-        .table th {
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8 !important; /* Gris sutil para el texto de los th */
-            padding: 14px 16px;
-            border: none !important;
-        }
-
-        /* Filas de la tabla con líneas divisorias delgadas y limpias */
-        .table td {
-            padding: 14px 16px;
-            color: #334155;
-            border-bottom: 1px solid #f1f5f9 !important;
-            border-top: none !important;
-            border-left: none !important;
-            border-right: none !important;
-        }
-
-        /* Efecto Hover interactivo al pasar el mouse por las filas */
-        .table-hover tbody tr:hover {
-            background-color: #f8fafc !important;
-            transition: background-color 0.15s ease;
-        }
-
-        /* Redondeado de los botones de acción dentro de las filas */
-        .table .btn-sm {
-            border-radius: 6px;
-            font-weight: 500;
-            padding: 5px 10px;
-        }
-
-        /* Insignia del SKU (Badge) */
-        .badge {
-            font-size: 0.8rem;
-            padding: 6px 10px;
-            border-radius: 6px;
-        }
-
-
-
+   COMPONENTES: ELEMENTOS VARIOS (LOGOS, BADGES)
+   ============================================================ */
+.logo { max-width: 150px; height: auto; }
+.badge { font-size: 0.8rem; padding: 6px 10px; border-radius: 6px; }
 

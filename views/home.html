@@ -11,124 +11,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #eef0f3; 
-            color: #333333;
-        }
+      
+    .main-content { padding-top: 20px; padding-bottom: 60px; }
+    .logo { height: 70px; }
+    
+    /* Solo cosas muy puntuales que no quieras repetir en otras páginas */
+    .table .btn-sm { border-radius: 6px; font-weight: 500; padding: 5px 12px; }
 
-        .main-content {
-            padding-top: 20px;
-            padding-bottom: 60px;
-        }
-
-        .logo {
-            height: 70px; 
-        }
-
-        /* Contenedor principal de la tabla (Formato Tarjeta Limpia) */
-        .dashboard-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            padding: 0 !important; 
-            overflow: hidden;       
-        }
-
-        /* Estilización simétrica para la barra de filtros */
-        .main-content .form-control, 
-        .main-content .form-select {
-            height: 42px !important;
-            font-size: 0.95rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px !important;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #94a3b8;
-            box-shadow: none !important;
-        }
-
-        /* ============================================================
-           🎯 ELIMINACIÓN TOTAL DE BORDES Y LÍNEAS RESIDUALES DE TABLA
-           ============================================================ */
-        .dashboard-card .table {
-            margin-bottom: 0;
-            vertical-align: middle; 
-            border: none !important;
-            border-collapse: collapse !important;
-            --bs-table-border-color: transparent !important;
-            --bs-table-accent-bg: transparent !important;
-            --bs-table-bg: transparent !important;
-            --bs-table-striped-bg: transparent !important;
-        }
-
-        .dashboard-card .table th, 
-        .dashboard-card .table td,
-        .dashboard-card .table tr {
-            border: none !important;
-            border-width: 0 !important;
-            box-shadow: none !important;
-        }
-
-        /* Encabezado Oscuro */
-        .dashboard-card .table th {
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8 !important;
-            padding: 14px 16px;
-            background-color: #1e293b !important;
-        }
-
-        /* Celdas Limpias */
-        .dashboard-card .table td {
-            padding: 14px 16px;
-            color: #2d3748;
-            background-color: #ffffff !important;
-            border-bottom: 1px solid #f1f5f9 !important; /* Divisor sutil */
-        }
-
-        /* Efecto Hover */
-        .table-hover tbody tr:hover td {
-            background-color: #f8fafc !important;
-            transition: background-color 0.15s ease;
-        }
-
-        .table .btn-sm {
-            border-radius: 6px;
-            font-weight: 500;
-            padding: 5px 12px;
-        }
-        
-        /* 🚨 ANIQUILACIÓN DE LÍNEAS RESIDUALES Y BORDES RAROS 🚨 */
-        .main-content hr, 
-        .main-content form hr {
-            display: none !important;
-        }
-
-        /* Forzamos a que los inputs fuera de los formularios no tengan margen sobrante */
-        #buscador-sku, #filtro-categoria {
-            margin-bottom: 0px !important;
-            margin-top: 0px !important;
-        }
-
-        /* 🚨 BORRADO DEFINITIVO DE LA LÍNEA REBELDE 🚨 */
-        .container.main-content > div,
-        .main-content,
-        [class*="flex-column"] {
-            border-bottom: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Tarjeta de la tabla */
-        .dashboard-card {
-            border: 1px solid #e2e8f0 !important;
-            margin-top: 25px !important;
-        }
     </style>
 </head>
 <body>
@@ -170,14 +61,23 @@
 
             </div>
 
-            <div class="d-flex align-items-center gap-2 mt-2 mt-md-0">
-                <a href="../backend/views/categorias.html" class="btn btn-outline-primary fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" style="border-radius: 8px !important; height: 42px !important; padding: 0 16px !important; margin: 0 !important; font-size: 0.95rem;">
+            <div class="d-flex align-items-center gap-2">
+    
+                <button id="btn-descargar" class="btn btn-outline-secondary fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" 
+                        style="height: 42px !important; padding: 0 20px !important; border-radius: 8px !important; font-size: 0.95rem; border: 1px solid #ced4da;">
+                    Descargar Excel
+                </button>
+
+                <a href="../backend/views/categorias.html" class="btn btn-outline-primary fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" 
+                   style="height: 42px !important; padding: 0 20px !important; border-radius: 8px !important; font-size: 0.95rem;">
                     + Categoría
                 </a>
-                <a href="../backend/views/productos.html" class="btn btn-success fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" style="border-radius: 8px !important; height: 42px !important; padding: 0 16px !important; margin: 0 !important; font-size: 0.95rem; color: white !important;">
+
+                <a href="../backend/views/productos.html" class="btn btn-success fw-semibold text-nowrap d-inline-flex align-items-center justify-content-center" 
+                   style="height: 42px !important; padding: 0 20px !important; border-radius: 8px !important; font-size: 0.95rem; color: white !important;">
                     + Nuevo Producto
                 </a>
-            </div>
+</div>
 
         </div>
         <div class="dashboard-card">
@@ -252,166 +152,168 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            
-            // 1. CARGAR LAS CATEGORÍAS EN LOS SELECTS
-            $.ajax({
-                url: '../backend/productos.php',
-                method: 'GET',
-                success: function (categorias) {
-                    if(Array.isArray(categorias) && categorias.length > 0) {
-                        categorias.forEach(cat => {
-                            $('#filtro-categoria').append(`<option value="${cat.nombre}">${cat.nombre}</option>`);
-                            $('#edit-categoria').append(`<option value="${cat.id}" data-nombre="${cat.nombre}">${cat.nombre}</option>`);
-                        });
-                    }
-                }
-            });
+   <script>
+    // 0. Variable global para almacenar los datos y poder descargarlos
+    let listaProductos = []; 
 
-            // 2. CARGAR LOS PRODUCTOS AL INICIAR
-            function cargarProductos() {
-                $.ajax({
-                    url: '../backend/productos.php', 
-                    method: 'GET', 
-                    data: { action: 'listarHome' }, 
-                    success: function (response) {
-                        let html = '';
-                        if(response.length > 0) {
-                            response.forEach(prod => {
-                                html += `
-                                    <tr id="fila-producto-${prod.id}" class="fila-producto" data-categoria="${prod.categoria}">
-                                        <td><span class="badge bg-light text-dark border fw-semibold">${prod.sku || 'S/S'}</span></td>
-                                        <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain; max-height: 50px;"></td>
-                                        <td class="prod-nombre">${prod.nombre}</td>
-                                        <td class="prod-cant fw-bold text-center">${prod.cantidad || 0} u.</td>
-                                        <td class="prod-cat">${prod.categoria}</td>
-                                        <td class="prod-precio">$${prod.precio}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center gap-1">
-                                                <button class="btn btn-primary btn-sm btn-editar" 
-                                                        data-id="${prod.id}" 
-                                                        data-sku="${prod.sku || ''}"
-                                                        data-precio="${prod.precio}">
-                                                    Editar
-                                                </button>
-                                                <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">
-                                                    Eliminar
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                `;
-                            });
-                        } else {
-                            html = '<tr><td colspan="7" class="text-center">No hay productos registrados</td></tr>';
-                        }
-                        $('#productos-lista').html(html);
-                    }
-                });
-            }
-            
-            cargarProductos();
-
-            // 3. LÓGICA DE FILTROS COMBINADOS (SKU + Categoría) EN TIEMPO REAL
-            function aplicarFiltros() {
-                const skuBuscado = $('#buscador-sku').val().toLowerCase().trim();
-                const categoriaSeleccionada = $('#filtro-categoria').val();
-
-                $('.fila-producto').each(function() {
-                    const fila = $(this);
-                    const filaSku = fila.find('td:first-child span').text().toLowerCase().trim();
-                    const filaCategoria = fila.data('categoria');
-
-                    const coincideSku = (skuBuscado === '' || filaSku.includes(skuBuscado));
-                    const coincideCategoria = (categoriaSeleccionada === 'todos' || filaCategoria === categoriaSeleccionada);
-
-                    if (coincideSku && coincideCategoria) {
-                        fila.fadeIn(120);
-                    } else {
-                        fila.hide();
-                    }
-                });
-            }
-
-            $('#filtro-categoria').on('change', aplicarFiltros);
-            $('#buscador-sku').on('keyup input', aplicarFiltros);
-
-            // 4. EVENTO ELIMINAR
-            $(document).on('click', '.btn-eliminar', function () {
-                const idProducto = $(this).data('id');
-                if (confirm('¿Estás seguro de que querés eliminar este producto?')) {
-                    $.ajax({
-                        url: '../backend/productos.php',
-                        method: 'POST',
-                        data: { action: 'eliminar', id: idProducto },
-                        dataType: 'json',
-                        success: function (res) {
-                            if (res.success) {
-                                alert(res.message);
-                                $(`#fila-producto-${idProducto}`).fadeOut(400, function() { $(this).remove(); });
-                            } else {
-                                alert('Error: ' + res.message);
-                            }
-                        }
+    $(document).ready(function () {
+        
+        // 1. CARGAR LAS CATEGORÍAS EN LOS SELECTS
+        $.ajax({
+            url: '../backend/productos.php',
+            method: 'GET',
+            success: function (categorias) {
+                if(Array.isArray(categorias) && categorias.length > 0) {
+                    categorias.forEach(cat => {
+                        $('#filtro-categoria').append(`<option value="${cat.nombre}">${cat.nombre}</option>`);
+                        $('#edit-categoria').append(`<option value="${cat.id}" data-nombre="${cat.nombre}">${cat.nombre}</option>`);
                     });
                 }
+            }
+        });
+
+        // 2. CARGAR LOS PRODUCTOS AL INICIAR
+        function cargarProductos() {
+            $.ajax({
+                url: '../backend/productos.php', 
+                method: 'GET', 
+                data: { action: 'listarHome' }, 
+                success: function (response) {
+                    listaProductos = response; // GUARDAMOS LOS DATOS AQUÍ
+                    let html = '';
+                    if(response.length > 0) {
+                        response.forEach(prod => {
+                            html += `
+                                <tr id="fila-producto-${prod.id}" class="fila-producto" data-categoria="${prod.categoria}">
+                                    <td><span class="badge bg-light text-dark border fw-semibold">${prod.sku || 'S/S'}</span></td>
+                                    <td><img src="../assets/img/${prod.imagen || 'default.png'}" width="50" style="object-fit: contain; max-height: 50px;"></td>
+                                    <td class="prod-nombre">${prod.nombre}</td>
+                                    <td class="prod-cant fw-bold text-center">${prod.cantidad || 0} u.</td>
+                                    <td class="prod-cat">${prod.categoria}</td>
+                                    <td class="prod-precio">$${prod.precio}</td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <button class="btn btn-primary btn-sm btn-editar" data-id="${prod.id}" data-sku="${prod.sku || ''}" data-precio="${prod.precio}">Editar</button>
+                                            <button class="btn btn-danger btn-sm btn-eliminar" data-id="${prod.id}">Eliminar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        html = '<tr><td colspan="7" class="text-center">No hay productos registrados</td></tr>';
+                    }
+                    $('#productos-lista').html(html);
+                }
             });
+        }
+        
+        cargarProductos();
 
-            // 5. EVENTO CLIC EN EDITAR
-            $(document).on('click', '.btn-editar', function() {
-                const id = $(this).data('id');
-                const sku = $(this).data('sku');
-                const precio = $(this).data('precio');
-                
-                const fila = $(`#fila-producto-${id}`);
-                const nombre = fila.find('.prod-nombre').text();
-                const cantidad = parseInt(fila.find('.prod-cant').text()) || 0;
-                const categoriaTexto = fila.find('.prod-cat').text();
+        // 3. NUEVA FUNCIÓN: DESCARGAR EXCEL
+        $('#btn-descargar').on('click', function() {
+            if (listaProductos.length === 0) return alert("No hay datos para descargar");
 
-                $('#edit-id').val(id);
-                $('#edit-sku').val(sku);
-                $('#edit-nombre').val(nombre);
-                $('#edit-cantidad').val(cantidad); 
-                $('#edit-precio').val(precio);
-                
-                $(`#edit-categoria option`).filter(function() {
-                    return $(this).data('nombre') === categoriaTexto;
-                }).prop('selected', true);
+            // Mapeamos los datos para que el Excel sea ordenado
+            const datosParaExcel = listaProductos.map(p => ({
+                SKU: p.sku,
+                Nombre: p.nombre,
+                Cantidad: p.cantidad,
+                Categoría: p.categoria,
+                Precio: p.precio
+            }));
 
-                $('#modalEditarProducto').modal('show');
+            const ws = XLSX.utils.json_to_sheet(datosParaExcel);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Productos");
+            XLSX.writeFile(wb, "Reporte_Productos.xlsx");
+        });
+
+        // 4. LÓGICA DE FILTROS COMBINADOS
+        function aplicarFiltros() {
+            const skuBuscado = $('#buscador-sku').val().toLowerCase().trim();
+            const categoriaSeleccionada = $('#filtro-categoria').val();
+
+            $('.fila-producto').each(function() {
+                const fila = $(this);
+                const filaSku = fila.find('td:first-child span').text().toLowerCase().trim();
+                const filaCategoria = fila.data('categoria');
+
+                const coincideSku = (skuBuscado === '' || filaSku.includes(skuBuscado));
+                const coincideCategoria = (categoriaSeleccionada === 'todos' || filaCategoria === categoriaSeleccionada);
+
+                fila.toggle(coincideSku && coincideCategoria);
             });
+        }
 
-            // 6. SUBMIT DEL FORMULARIO DE EDICIÓN
-            $('#form-editar-producto').on('submit', function(e) {
-                e.preventDefault(); 
-                
-                let formData = new FormData(this);
-                formData.append('action', 'editar'); 
+        $('#filtro-categoria').on('change', aplicarFiltros);
+        $('#buscador-sku').on('keyup input', aplicarFiltros);
 
+        // 5. EVENTO ELIMINAR
+        $(document).on('click', '.btn-eliminar', function () {
+            const idProducto = $(this).data('id');
+            if (confirm('¿Estás seguro de eliminar este producto?')) {
                 $.ajax({
                     url: '../backend/productos.php',
                     method: 'POST',
-                    data: formData,
-                    processData: false, 
-                    contentType: false, 
+                    data: { action: 'eliminar', id: idProducto },
                     dataType: 'json',
-                    success: function(res) {
-                        if(res.success) {
+                    success: function (res) {
+                        if (res.success) {
                             alert(res.message);
-                            $('#modalEditarProducto').modal('hide');
-                            cargarProductos(); 
+                            cargarProductos(); // Recargamos para refrescar la lista global
                         } else {
                             alert('Error: ' + res.message);
                         }
-                    },
-                    error: function() {
-                        alert('Error de comunicación con el servidor al editar.');
                     }
                 });
-            }); 
+            }
+        });
+
+        // 6. EVENTO EDITAR
+        $(document).on('click', '.btn-editar', function() {
+            const id = $(this).data('id');
+            const sku = $(this).data('sku');
+            const precio = $(this).data('precio');
+            const fila = $(`#fila-producto-${id}`);
+            
+            $('#edit-id').val(id);
+            $('#edit-sku').val(sku);
+            $('#edit-nombre').val(fila.find('.prod-nombre').text());
+            $('#edit-cantidad').val(parseInt(fila.find('.prod-cant').text())); 
+            $('#edit-precio').val(precio);
+            
+            const catNombre = fila.find('.prod-cat').text();
+            $(`#edit-categoria option[data-nombre="${catNombre}"]`).prop('selected', true);
+
+            $('#modalEditarProducto').modal('show');
+        });
+
+        // 7. SUBMIT EDITAR
+        $('#form-editar-producto').on('submit', function(e) {
+            e.preventDefault(); 
+            let formData = new FormData(this);
+            formData.append('action', 'editar'); 
+
+            $.ajax({
+                url: '../backend/productos.php',
+                method: 'POST',
+                data: formData,
+                processData: false, contentType: false, dataType: 'json',
+                success: function(res) {
+                    if(res.success) {
+                        alert(res.message);
+                        $('#modalEditarProducto').modal('hide');
+                        cargarProductos(); 
+                    } else {
+                        alert('Error: ' + res.message);
+                    }
+                }
+            });
         }); 
-    </script>
+    }); 
+</script>
 </body>
 </html>
