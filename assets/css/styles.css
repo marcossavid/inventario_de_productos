@@ -98,3 +98,31 @@ form label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: 
 
 .badge { font-size: 0.8rem; padding: 6px 10px; border-radius: 6px; }
 
+
+
+/* Eliminamos redondeos y forzamos bordes rectos */
+.btn-square {
+    border-radius: 0 !important; /* Esquinas rectas */
+    height: 42px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Ajustes para los botones de iconos */
+.btn-outline-secondary.btn-square {
+    border: 1px solid #ced4da;
+    background: white;
+}
+
+/* Efecto hover profesional */
+.btn-square:hover {
+    filter: brightness(0.9);
+}
+
+/* Asegurar que los botones de texto se estiren */
+.flex-grow-1 {
+    flex-grow: 1 !important;
+}

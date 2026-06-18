@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../assets/css/styles.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -17,31 +18,51 @@
         </nav>
     </header>
    
-    <form id="form-productos" action="../productos.php" method="POST" enctype="multipart/form-data">
-        <h3>Alta de Productos</h3>
-        
-        <label>Nombre del Producto</label>
-        <input type="text" name="nombre" required>
+   <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <form id="form-productos" action="../productos.php" method="POST" enctype="multipart/form-data">
+    <h3 class="mb-4">Alta de Productos</h3>
+    
+    <div class="mb-3">
+        <label class="form-label">Nombre del Producto</label>
+        <input type="text" name="nombre" class="form-control" required>
+    </div>
 
-        <label>Código SKU</label>
-        <input type="text" name="sku" placeholder="Ej: REM-NEGRA-L, ACC-001" required>
+    <div class="mb-3">
+        <label class="form-label">Código SKU</label>
+        <input type="text" name="sku" class="form-control" placeholder="Ej: REM-NEGRA-L" required>
+    </div>
 
-        <label>Imagen</label>
-        <input type="file" name="imagen" required>
+    <div class="mb-3">
+        <label class="form-label">Imagen</label>
+        <input type="file" name="imagen" class="form-control" required>
+    </div>
 
-        <label>Cantidad (Stock)</label>
-        <input type="number" name="cantidad" min="0" value="0" required>
+    <div class="mb-3">
+        <label class="form-label">Cantidad (Stock)</label>
+        <input type="number" name="cantidad" class="form-control" min="0" value="0" required>
+    </div>
 
-        <label for="categoria">Categoría:</label>
-        <select name="categoria" id="categoria" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    <div class="mb-3">
+        <label class="form-label">Categoría:</label>
+        <select name="categoria" id="categoria" class="form-select" required>
             <option value="">Cargando categorías...</option>
         </select>
-        
-        <label>Precio</label>
-        <input type="number" name="precio" required>
+    </div>
 
-        <button type="submit">Guardar</button>
-    </form>
+    <div class="mb-3">
+        <label class="form-label">Precio</label>
+        <input type="number" name="precio" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+</form>
+            </div>
+        </div>
+    </div>
+</div>
     <div>Autor Marcos Savid</div>
     
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
