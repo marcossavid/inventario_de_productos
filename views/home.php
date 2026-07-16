@@ -1,3 +1,8 @@
+<?php
+// Primero validamos la sesión antes de mostrar cualquier cosa
+require_once '../backend/auth.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,8 +36,9 @@
         
         <ul class="nav-links" id="nav-links">
             <li><a href="#">Home</a></li>
-            <li><a href="../backend/views/lista_categorias.html">Lista Categorías</a></li>
-            <li><a href="../backend/views/reportes.html">Reportes</a></li>
+            <li><a href="lista_categorias.php">Lista Categorías</a></li>
+            
+            <li><a href="../backend/logout.php" class="text-danger">Cerrar Sesión</a></li>
         </ul>
     </nav>
     </header>
@@ -75,11 +81,11 @@
     📊
 </button>
 
-    <a href="../backend/views/categorias.html" class="btn btn-outline-primary btn-square flex-grow-1">
+    <a href="categorias.php" class="btn btn-outline-primary btn-square flex-grow-1">
         + Categoría
     </a>
 
-    <a href="../backend/views/productos.html" class="btn btn-success btn-square flex-grow-1 text-white">
+    <a href="productos.php" class="btn btn-success btn-square flex-grow-1 text-white">
         + Producto
     </a>
 </div>
@@ -209,6 +215,7 @@
                 method: 'GET', 
                 data: { action: 'listarHome' }, 
                 success: function (response) {
+                    $('#productos-lista').empty();
                     listaProductos = response; // GUARDAMOS LOS DATOS AQUÍ
                     let html = '';
                     if(response.length > 0) {

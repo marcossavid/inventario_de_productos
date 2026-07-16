@@ -1,19 +1,22 @@
+<?php
+require_once __DIR__ . '/../backend/auth.php'; 
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>My Store</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../assets/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../views/home.html">Home</a></li>
-                <li><a href="lista_categorias.html">Lista Categorias</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="lista_categorias.php">Lista Categorias</a></li>
             </ul>
         </nav>
     </header>
@@ -22,7 +25,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card p-4 shadow-sm">
-                <form id="form-productos" action="../productos.php" method="POST" enctype="multipart/form-data">
+                <form id="form-productos" action="../backend/productos.php" method="POST" enctype="multipart/form-data">
     <h3 class="mb-4">Alta de Productos</h3>
     
     <div class="mb-3">
@@ -66,12 +69,12 @@
     <div>Autor Marcos Savid</div>
     
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="../../assets/js/validaciones.js" type="text/javascript"></script>
+    <script src="../assets/js/validaciones.js" type="text/javascript"></script>
     
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Le pedimos la lista de categorías al backend
-        fetch('../productos.php')
+       fetch('../backend/productos.php')
             .then(response => response.json())
             .then(categorias => {
                 const select = document.getElementById('categoria');

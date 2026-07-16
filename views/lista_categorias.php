@@ -1,11 +1,14 @@
+<?php
+require_once __DIR__ . '/../backend/auth.php'; 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Categorías</title>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,9 +18,9 @@
      <header>
             <nav class="navbar">
                 <ul class="nav-links">
-                    <li><a href="../../views/home.html">Home</a></li>
+                    <li><a href="home.php">Home</a></li>
                     <li><a href="lista_categorias.html" style="text-decoration: underline;">Lista Categorias</a></li>
-                    <li><a href="reportes.html" >Reportes</a></li>
+                    
                 </ul>
             </nav>
         </header>
@@ -50,7 +53,7 @@
         // 1. FUNCIÓN PARA CARGAR LA LISTA DE CATEGORÍAS
         function cargarCategorias() {
             $.ajax({
-                url: '../../class/autoload.php',
+                url: '../backend/categorias.php',
                 method: 'POST',
                 data: { action: 'listarCategorias' },
                 success: function(response) {
@@ -67,7 +70,7 @@
             
             if (confirm('¿Estás seguro de que querés eliminar esta categoría?\n¡¡ATENCIÓN!! Esto también eliminará todos los productos asociados.')) {
                 $.ajax({
-                    url: '../../class/autoload.php',
+                    url: '../backend/categorias.php',
                     method: 'POST',
                     data: { action: 'eliminarCategoria', id: idCategoria }, // Mandamos la acción al backend
                     dataType: 'json',

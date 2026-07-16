@@ -1,5 +1,6 @@
 <?php
-/*autor Marcos Savid*/
+/*autor Marcos Savid
+ruta:class/data_base.php*/
 class DataBase {
 
     private $host = "sql113.infinityfree.com";

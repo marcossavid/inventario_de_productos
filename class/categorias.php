@@ -1,10 +1,13 @@
 <?php
 /*autor Marcos Savid*/
+/*archivo de class->categorias.php*/
 require_once 'data_base.php';
 
+if (!class_exists('Categorias')) {
 class Categorias {
     private $id;
     private $nombre;
+    private $usuario_id; // 🎯 NUEVO: Para identificar al dueño
     private $db;
 
     public function __construct() {
@@ -20,24 +23,29 @@ class Categorias {
         $this->nombre = $nombre; 
     }
 
-    // --- Método guardar ---
+    public function setUsuarioId($usuario_id) { 
+        $this->usuario_id = $usuario_id; 
+    }
+
+    // --- Método guardar (seguro) ---
     public function guardar() { 
-        $sql = "INSERT INTO categorias (nombre) VALUES (?)";
-        $params = [$this->nombre];
+        $sql = "INSERT INTO categorias (nombre, usuario_id) VALUES (?, ?)";
+        $params = [$this->nombre, $this->usuario_id];
         return $this->db->insert($sql, $params);
     }
 
-    // --- Método eliminar ---
-    public function eliminar($id) {
-        $sql = "DELETE FROM categorias WHERE id = ?";
-        $params = [$id];
+    // --- Método eliminar (seguro) ---
+    public function eliminarPorUsuario($id, $usuario_id) {
+        // Borra solo si el id de la categoría pertenece al usuario
+        $sql = "DELETE FROM categorias WHERE id = ? AND usuario_id = ?";
+        $params = [$id, $usuario_id];
         return $this->db->delete($sql, $params);
     }
 
-    // --- ¡ESTO ES LO QUE FALTA! Método para traer todas las categorías ---
-    public function listarTodas() {
-        $sql = "SELECT id, nombre FROM categorias ORDER BY nombre ASC";
-        return $this->db->select($sql); // Usamos tu método select de la base de datos
+    // --- Método para traer solo las categorías del usuario logueado ---
+    public function listarPorUsuario($usuario_id) {
+        $sql = "SELECT id, nombre FROM categorias WHERE usuario_id = ? ORDER BY nombre ASC";
+        return $this->db->select($sql, [$usuario_id]);
     }
-}
+}}
 ?>
